@@ -1,0 +1,54 @@
+* Ram Cell (1 bit)
+.option scale=1E-6
+
+* Include SkyWater sky130 device models
+.include "../../skywater-pdk-libs-sky130_fd_pr-main/models/r+c/res_typical__cap_typical__lin.spice"
+.include "../../skywater-pdk-libs-sky130_fd_pr-main/models/r+c/res_typical__cap_typical.spice"
+.include "../../skywater-pdk-libs-sky130_fd_pr-main/models/corners/tt.spice"
+
+
+
+* Sram Cell 
+* O : Output. B : Output BAR
+
+.SUBCKT ram_cell	VDD VSS O B
+XN_	O B VSS VSS	sky130_fd_pr__nfet_01v8
+XP_	O B VDD VDD	sky130_fd_pr__pfet_01v8
+
+XNB	B O VSS VSS	sky130_fd_pr__nfet_01v8
+XPB	B O VDD VDD	sky130_fd_pr__pfet_01v8
+.ENDS
+
+.SUBCKT BTL_EQUALIZER	VDD VSS O B PHI
+XO	VDD PHI O VSS	sky130_fd_pr__nfet_01v8
+XB	VDD PHI B VSS	sky130_fd_pr__nfet_01v8
+XBO	O   PHI B VSS	sky130_fd_pr__nfet_01v8
+.ENDS
+
+.SUBCKT ram_cell_access	VDD VSS O B PHI
+X0	VDD VSS O_ B_	ram_cell
+XO	O PHI O_ VSS	sky130_fd_pr__nfet_01v8
+XB	B PHI B_ VSS	sky130_fd_pr__nfet_01v8
+.ENDS
+
+
+V_1V8	VDD 0 DC 1.8
+*V_RD_	O_ 0	DC 0   PULSE(0 1.8 100n 0.1n 0.1n 100n 200n ) 
+*V_RDB	B_ 0	DC 1.8 PULSE(0 1.8 100n 0.1n 0.1n 100n 200n ) 
+*C_RD_	O_ O	10p
+*C_RDB	B_ B	10p
+
+V_Prd	Prd 0	DC 0 PULSE(0 1.8 50n 0.1n 0.1n 1n 35n ) 
+V_Pbl	Pbl 0	DC 0 PULSE(0 1.8 40n 0.1n 0.1n 1n 35n ) 
+CO	O 0	1p
+CB	B 0	1p
+
+X0	VDD 0 O B Prd	ram_cell_access
+.IC V(X0.O_)=1.8 V(x0.b_)=0
+
+.control
+op
+print V(x0.x0.b) V(x0.x0.o)
+.endc
+*.tran 0.01n 100n 
+*.plot VDD O O_ B B_
