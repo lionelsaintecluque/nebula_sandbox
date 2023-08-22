@@ -1,0 +1,41 @@
+* SPICE3 file created from test_inverseur.ext - technology: sky130A
+
+.subckt cell Y VP VN
+X0 Y A VP VP sky130_fd_pr__pfet_01v8 ad=0.9 pd=4.9 as=0.9 ps=4.9 w=2 l=0.15
+X1 Y A VN VN sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=1 l=0.15
+.ends
+* Sram Cell 
+* O : Output. B : Output BAR
+
+.SUBCKT ram_cell	VDD VSS O B
+XN_	O B VSS VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=1 l=0.15
+XP_	O B VDD VDD	sky130_fd_pr__pfet_01v8 ad=0.9 pd=4.9 as=0.9 ps=4.9 w=2 l=0.15
+
+XNB	B O VSS VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=1 l=0.15
+XPB	B O VDD VDD	sky130_fd_pr__pfet_01v8 ad=0.9 pd=4.9 as=0.9 ps=4.9 w=2 l=0.15
+.ENDS
+
+.SUBCKT BTL_EQUALIZER	VDD VSS O B PHI
+XO	VDD PHI O VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=3 l=0.15
+XB	VDD PHI B VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=3 l=0.15
+XBO	O   PHI B VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=3 l=0.15
+.ENDS
+
+.SUBCKT ram_cell_access	VDD VSS O B PHI
+X0	VDD VSS O_ B_	ram_cell
+XO	O PHI O_ VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=2 l=0.15
+XB	B PHI B_ VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=2 l=0.15
+.ENDS
+
+.SUBCKT ampli_diff	VDD VSS O B PHI_
+XN_	O B CTL_ VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=1 l=0.15
+XP_	O B CTLB VDD	sky130_fd_pr__pfet_01v8 ad=0.9 pd=4.9 as=0.9 ps=4.9 w=2 l=0.15
+
+XNB	B O CTL_ VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=1 l=0.15
+XPB	B O CTLB VDD	sky130_fd_pr__pfet_01v8 ad=0.9 pd=4.9 as=0.9 ps=4.9 w=2 l=0.15
+
+XINV_	PHIB CTLB VSS VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=1 l=0.15
+XINVP	PHIB CTLB VDD VDD	sky130_fd_pr__pfet_01v8 ad=0.9 pd=4.9 as=0.9 ps=4.9 w=2 l=0.15
+XCTL_	CTL_ PHI_ VSS VSS	sky130_fd_pr__nfet_01v8 ad=0.45 pd=2.9 as=0.45 ps=2.9 w=2 l=0.15
+XCTLP	CTLB PHIB VDD VDD	sky130_fd_pr__pfet_01v8 ad=0.9 pd=4.9 as=0.9 ps=4.9 w=2 l=0.15
+.ENDS
