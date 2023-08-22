@@ -12,14 +12,38 @@ V_0V9	VDD2 0 DC 0.9
 *C_RD_	O_ O	10p
 *C_RDB	B_ B	10p
 
-V_Prd	Prd 0	DC 0 PULSE(0 1.8 2n 0.01n 0.01n 0.9n 10n ) 
-V_Pbl	Pbl 0	DC 0 PULSE(0 1.8 1n 0.01n 0.01n 0.9n 10n ) 
+V_Prd0	Prd0 0	DC 0 PULSE(0 1.8  2n 0.01n 0.01n 0.9n 80n ) 
+V_Prd1	Prd1 0	DC 0 PULSE(0 1.8 12n 0.01n 0.01n 0.9n 80n ) 
+V_Prd2	Prd2 0	DC 0 PULSE(0 1.8 22n 0.01n 0.01n 0.9n 80n ) 
+V_Prd3	Prd3 0	DC 0 PULSE(0 1.8 32n 0.01n 0.01n 0.9n 80n ) 
+V_Prd4	Prd4 0	DC 0 PULSE(0 1.8 42n 0.01n 0.01n 0.9n 80n ) 
+V_Prd5	Prd5 0	DC 0 PULSE(0 1.8 52n 0.01n 0.01n 0.9n 80n ) 
+V_Prd6	Prd6 0	DC 0 PULSE(0 1.8 62n 0.01n 0.01n 0.9n 80n ) 
+V_Prd7	Prd7 0	DC 0 PULSE(0 1.8 72n 0.01n 0.01n 0.9n 80n ) 
+V_Pbl	Pbl  0	DC 0 PULSE(0 1.8 1n 0.01n 0.01n 0.9n 10n ) 
+V_Prd	Prd  0	DC 0 PULSE(0 1.8 2n 0.01n 0.01n 0.9n 10n ) 
+
+
 CO	O 0	0.1p
 CB	B 0	0.1p
 
-.NODESET V(X0.B_)=1.8 
+.NODESET V(Xb00.B_)=1.8 
+.NODESET V(Xb01.O_)=1.8 
+.NODESET V(Xb02.B_)=1.8 
+.NODESET V(Xb03.O_)=1.8 
+.NODESET V(Xb04.B_)=1.8 
+.NODESET V(Xb05.O_)=1.8 
+.NODESET V(Xb06.B_)=1.8 
+.NODESET V(Xb07.O_)=1.8 
 *V(x0.B)=0V
-X0	VDD 0 O B Prd	ram_cell_access
+Xb00	VDD 0 O B Prd0	ram_cell_access
+Xb01	VDD 0 O B Prd1	ram_cell_access
+Xb02	VDD 0 O B Prd2	ram_cell_access
+Xb03	VDD 0 O B Prd3	ram_cell_access
+Xb04	VDD 0 O B Prd4	ram_cell_access
+Xb05	VDD 0 O B Prd5	ram_cell_access
+Xb06	VDD 0 O B Prd6	ram_cell_access
+Xb07	VDD 0 O B Prd7	ram_cell_access
 x1	VDD2 0 O B Pbl	BTL_equalizer
 x2	VDD 0 O B Prd	ampli_diff
 
