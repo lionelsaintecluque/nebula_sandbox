@@ -1,0 +1,20 @@
+* test includes
+
+.param switch = 1
+
+.if ( switch )
+	.control 
+	echo "True :"
+	.endc
+	.include 1.spice
+.else
+	.control 
+	echo "False :"
+	.endc
+	.include 2.spice
+.endif
+
+.control
+echo 'fin du test'
+.endc
+

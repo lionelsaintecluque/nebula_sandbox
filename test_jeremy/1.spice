@@ -1,0 +1,3 @@
+.control
+echo "fichier 1"
+.endc
