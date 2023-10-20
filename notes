@@ -1,0 +1,106 @@
+https://hackaday.io/project/27280-ygrec8/log/200521-the-ygrec8-assembler
+
+
+S    :    S E '\n' { printf("= %d\n", Top()); }
+     |    
+     ;
+     
+
+ this.register = {
+            "d1": 0,
+            "a1": 1,
+            "d2": 2,
+            "a2": 3,
+
+            "r1": 4,
+            "r2": 5,
+            "r3": 6,
+            "pc": 7,
+        };
+
+        this.register_cnd3 = {
+            "nevr": 0,
+            "ifnc": 1,
+            "ifns": 2,
+            "ifnz": 3,
+
+            "alws": 4,
+            "ifc":  5,
+            "ifs":  6,
+            "ifz":  7,
+        };
+
+
+this.keywords_op = {
+            "or":   0x00000,
+            "xor":  0x01000,
+            "and":  0x02000,
+            "andn": 0x03000,
+            "cmpu": 0x04000,
+            "cmps": 0x05000,
+            "sub":  0x06000,
+            "add":  0x07000,
+            "set":  0x08000,
+            "call": 0x09000,
+
+            "sh":   0x1A000,
+            "sa":   0x1A080,
+            "ro":   0x1A100,
+            "rc":   0x1A180,
+            "ldcl": 0x1A200,
+            "ldch": 0x1A280,
+
+            "in":   0x2C000,
+            "out":  0x2D000,
+            "pf":   0x3E000,
+            "inv":  0x4F000,
+        };
+ this.register = {
+            "d1": 0,
+            "a1": 1,
+            "d2": 2,
+            "a2": 3,
+
+            "r1": 4,
+            "r2": 5,
+            "r3": 6,
+            "pc": 7,
+        };
+
+        this.register_cnd3 = {
+            "nevr": 0,
+            "ifnc": 1,
+            "ifns": 2,
+            "ifnz": 3,
+
+            "alws": 4,
+            "ifc":  5,
+            "ifs":  6,
+            "ifz":  7,
+        };
+
+
+this.keywords_op = {
+            "or":   0x00000,
+            "xor":  0x01000,
+            "and":  0x02000,
+            "andn": 0x03000,
+            "cmpu": 0x04000,
+            "cmps": 0x05000,
+            "sub":  0x06000,
+            "add":  0x07000,
+            "set":  0x08000,
+            "call": 0x09000,
+
+            "sh":   0x1A000,
+            "sa":   0x1A080,
+            "ro":   0x1A100,
+            "rc":   0x1A180,
+            "ldcl": 0x1A200,
+            "ldch": 0x1A280,
+
+            "in":   0x2C000,
+            "out":  0x2D000,
+            "pf":   0x3E000,
+            "inv":  0x4F000,
+        };
